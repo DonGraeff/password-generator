@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Password Generator</h1>
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            <label for="length">Password Length:</label>
+            <input type="number" name="length" id="length" min="4" max="64" value="8" required>
+            
+            <div class="form-check">
+                <input type="checkbox" name="uppercase" class="form-check-input" id="uppercase">
+                <label for="uppercase" class="form-check-label">Include uppercase letters</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" name="numbers" class="form-check-input" id="numbers">
+                <label for="numbers" class="form-check-label">Include numbers</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" name="special" class="form-check-input" id="special">
+                <label for="special" class="form-check-label">Include special characters</label>
+            </div>
+            
+            <button type="submit">Generate Password</button>
+        </form>
+
+        {% if password %}
+            <div class="result">
+                <p>Your generated password: <span>{{ password }}</span></p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
